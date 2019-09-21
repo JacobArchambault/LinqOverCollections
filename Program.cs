@@ -24,6 +24,7 @@ namespace LinqOverCollections
             GetFastCars(myCars);
             GetFastBMWs(myCars);
             LINQOverArrayList();
+            OfTypeAsFilter();
             Console.ReadLine();
         }
 
@@ -66,6 +67,18 @@ namespace LinqOverCollections
             foreach (var car in fastCars)
                 Console.WriteLine($"{car.PetName} is going too fast!");
 
+        }
+
+        static void OfTypeAsFilter()
+        {
+            // Extract the ints from the ArrayList.
+            ArrayList myStuff = new ArrayList();
+            myStuff.AddRange(new object[] { 10, 400, 8, false, new Car(), "string data" });
+            var myInts = myStuff.OfType<int>();
+
+            // Prints out 10, 400, and 8.
+            foreach (int i in myInts)
+                Console.WriteLine("Int value: {0}", i);
         }
     }
 }

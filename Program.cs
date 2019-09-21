@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,6 +23,7 @@ namespace LinqOverCollections
 
             GetFastCars(myCars);
             GetFastBMWs(myCars);
+            LINQOverArrayList();
             Console.ReadLine();
         }
 
@@ -40,6 +42,30 @@ namespace LinqOverCollections
 
             foreach (var car in fastCars)
                 Console.WriteLine($"{car.PetName} is going too fast!");
+        }
+        static void LINQOverArrayList()
+        {
+            Console.WriteLine("***** LINQ Over ArrayList *****");
+
+            // Here is a nongeneric collection of cars.
+            ArrayList myCars = new ArrayList()
+            {
+                new Car {PetName = "Henry", Color = "Silver", Speed = 100, Make = "BMW"},
+                new Car {PetName = "Daisy", Color = "Tan", Speed = 90, Make = "BMW"},
+                new Car {PetName = "Mary", Color = "Black", Speed = 55, Make = "VW"},
+                new Car {PetName = "Clunker", Color = "Rust", Speed = 5, Make = "Yugo"},
+                new Car {PetName = "Melvin", Color = "White", Speed = 43, Make = "Ford" } ,
+            };
+
+            //Transform ArrayList into an IEnumerable<T>-compatible type.
+            var myCarsEnum = myCars.OfType<Car>();
+
+            //Create a query into an IEnumerable<T>-compatible type.
+            var fastCars = from c in myCarsEnum where c.Speed > 55 select c;
+
+            foreach (var car in fastCars)
+                Console.WriteLine($"{car.PetName} is going too fast!");
+
         }
     }
 }

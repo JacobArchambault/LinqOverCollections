@@ -8,7 +8,7 @@ namespace LinqOverCollections
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("LINQ over Generic Collections");
+            Console.WriteLine("***** LINQ over Generic Collections *****");
 
             // Make a List<> of Car objects.
             List<Car> myCars = new List<Car>()
@@ -21,7 +21,7 @@ namespace LinqOverCollections
             };
 
             GetFastCars(myCars);
-
+            GetFastBMWs(myCars);
             Console.ReadLine();
         }
 
@@ -29,6 +29,14 @@ namespace LinqOverCollections
         {
             // Find all Car objects in the List<> where the Speed is greater than 55.
             var fastCars = from c in myCars where c.Speed > 55 select c;
+
+            foreach (var car in fastCars)
+                Console.WriteLine($"{car.PetName} is going too fast!");
+        }
+
+        static void GetFastBMWs(List<Car> myCars)
+        {
+            var fastCars = from c in myCars where c.Speed > 90 && c.Make == "BMW" select c;
 
             foreach (var car in fastCars)
                 Console.WriteLine($"{car.PetName} is going too fast!");
